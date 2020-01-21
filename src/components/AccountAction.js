@@ -2,14 +2,14 @@ import React from 'react'
 import { useLoggedIn } from '../hooks/authentication'
 
 import SignIn from './SignIn'
-import SignOut from './SignOut'
+import AccountDropDown from './AccountDropDown'
 
 const AccountAction = () => {
   const { loggedIn, logout, login } = useLoggedIn()
 
   return <div className='account'>
     {
-      loggedIn ? <SignOut callback={logout} /> : <SignIn callback={login} />
+      loggedIn ? <AccountDropDown logoutCallback={logout} /> : <SignIn callback={login} />
     }
   </div>
 }

@@ -5,6 +5,8 @@ import { ApolloProvider } from '@apollo/react-hooks'
 
 import App from './src/components/App'
 
+import 'semantic-ui-css/semantic.min.css'
+
 const client = new ApolloClient({
   uri: 'http://localhost:8090/graphql',
   credentials: 'include'
