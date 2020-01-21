@@ -6,6 +6,7 @@ import HomePage from '../pages/HomePage'
 import BotsPage from '../pages/BotsPage'
 import BotPage from '../pages/BotPage'
 import UserPage from '../pages/UserPage'
+import SettingsPage from '../pages/SettingsPage'
 import TopBar from './TopBar'
 
 const App = () => {
@@ -26,6 +27,9 @@ const App = () => {
             </Route>
             <Route exact path='/user/:id'>
               <UserPage />
+            </Route>
+            <Route exact path='/settings'>
+              <SettingsPage />
             </Route>
             <Route exact path='/dash'></Route>
           </Switch>

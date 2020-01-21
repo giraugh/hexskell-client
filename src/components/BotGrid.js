@@ -5,7 +5,7 @@ import propTypes from 'prop-types'
 import BotItem from './BotItem'
 
 const BotGrid = ({ bots, ...opts }) => (
-  <Card.Group>
+  <Card.Group centered>
     {bots.map(bot => (
       <BotItem key={bot.id} data={bot} {...opts} />
     ))}
