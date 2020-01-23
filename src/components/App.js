@@ -1,13 +1,16 @@
-import React from 'react'
+import React, { Suspense, lazy } from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import { Segment, Container } from 'semantic-ui-react'
 
-import HomePage from '../pages/HomePage'
-import BotsPage from '../pages/BotsPage'
-import BotPage from '../pages/BotPage'
-import UserPage from '../pages/UserPage'
-import SettingsPage from '../pages/SettingsPage'
 import TopBar from './TopBar'
+
+const HomePage = lazy(() => import('../pages/HomePage'))
+const BotsPage = lazy(() => import('../pages/BotsPage'))
+const BotPage = lazy(() => import('../pages/BotPage'))
+const UserPage = lazy(() => import('../pages/UserPage'))
+const SettingsPage = lazy(() => import('../pages/SettingsPage'))
+
+const withSuspense = (Page) => _ => (<Suspense fallback={<div>loading...</div>}> <Page/> </Suspense>)
 
 const App = () => {
   return (
@@ -16,21 +19,11 @@ const App = () => {
         <TopBar />
         <Container style={{ padding: '2em 0em' }}>
           <Switch>
-            <Route exact path='/'>
-              <HomePage />
-            </Route>
-            <Route exact path='/bots'>
-              <BotsPage />
-            </Route>
-            <Route exact path='/bot/:id'>
-              <BotPage />
-            </Route>
-            <Route exact path='/user/:id'>
-              <UserPage />
-            </Route>
-            <Route exact path='/settings'>
-              <SettingsPage />
-            </Route>
+            <Route exact path='/' component={withSuspense(HomePage)} />
+            <Route exact path='/bots' component={withSuspense(BotsPage)}/>
+            <Route exact path='/bot/:id' component={withSuspense(BotPage)}/>
+            <Route exact path='/user/:id' component={withSuspense(UserPage)}/>
+            <Route exact path='/settings' component={withSuspense(SettingsPage)}/>
             <Route exact path='/dash'></Route>
           </Switch>
         </Container>
