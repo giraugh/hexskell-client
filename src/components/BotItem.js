@@ -8,8 +8,13 @@ import ProfilePicture from './ProfilePicture'
 const PLACEHOLDER_WINS = 12
 const PLACEHOLDER_RANK = 3
 
+const cardStyle = {
+  width: '95%',
+  textAlign: 'start'
+}
+
 const BotItem = ({ data: { id, name, author }, hideAuthor = false, hideBotLink = false }) => (
-  <Card>
+  <Card style={cardStyle}>
     <Card.Content>
       <ProfilePicture user={author} doFloat={true} />
       <Card.Header as={hideBotLink ? 'span' : Link} to={`/bot/${id}`}> {name} </Card.Header>
