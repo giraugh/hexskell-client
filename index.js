@@ -2,13 +2,14 @@ import React from 'react'
 import { render } from 'react-dom'
 import ApolloClient from 'apollo-boost'
 import { ApolloProvider } from '@apollo/react-hooks'
+import { BACK_END_GQL_ADDRESS } from './src/config'
 
 import App from './src/components/App'
 
 import 'semantic-ui-css/semantic.min.css'
 
 const client = new ApolloClient({
-  uri: 'http://localhost:8090/graphql',
+  uri: BACK_END_GQL_ADDRESS,
   credentials: 'include'
 })
 
