@@ -7,13 +7,17 @@ import propTypes from 'prop-types'
 
 const handleGoogleResponse = (response, client, callback) => {
   // Get token from response
+  console.log(response)
+  if (!response.Zi) {
+    throw Error('Google response didnt include Zi property')
+  }
   const token = response.Zi.id_token
   if (!token) {
-    throw Error('Google response didnt include id token')
+    throw Error('Google response didnt include Zi.id_token property')
   }
 
   // Send it to backend
-  window.fetch(`${BACK_END_AUTH_ADDRESS}/login?token=${token}`, {
+  window.fetch(`http://${BACK_END_AUTH_ADDRESS}/login?token=${token}`, {
     method: 'POST',
     credentials: 'include'
   })
