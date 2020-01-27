@@ -29,7 +29,7 @@ const sortOptions = [
 ]
 
 const BotsPage = () => {
-  const [gridControls, setGridControls] = useState(null)
+  const [, setGridControls] = useState(null)
   const { loading: botsLoading, error: botsError, data: botsData } = useQuery(GET_BOTS)
 
   if (botsLoading) { return <Segment loading padded='very' /> }
