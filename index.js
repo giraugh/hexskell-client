@@ -8,8 +8,10 @@ import App from './src/components/App'
 
 import 'semantic-ui-css/semantic.min.css'
 
+console.log(`Connecting to Graph QL API @ http://${BACK_END_GQL_ADDRESS}`)
+
 const client = new ApolloClient({
-  uri: BACK_END_GQL_ADDRESS,
+  uri: `http://${BACK_END_GQL_ADDRESS}`,
   credentials: 'include'
 })
 
