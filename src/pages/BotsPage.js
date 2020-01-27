@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useQuery } from '@apollo/react-hooks'
 import { gql } from 'apollo-boost'
-import BotGrid from '../components/BotGrid'
-import { Segment, Pagination, Container } from 'semantic-ui-react'
+import { Segment } from 'semantic-ui-react'
+import FilteredBotGrid from '../components/FilteredBotGrid'
 
 const GET_BOTS = gql`
   {
@@ -18,28 +18,31 @@ const GET_BOTS = gql`
   }
 `
 
+const SORT_ALPHABETICAL = 'alphabetical'
+const SORT_WINS_INC = 'wins_inc'
+const SORT_WINS_DEC = 'wins_dec'
+
+const sortOptions = [
+  { key: SORT_ALPHABETICAL, text: 'alphabetically', value: SORT_ALPHABETICAL },
+  { key: SORT_WINS_INC, text: 'by least wins', value: SORT_WINS_INC },
+  { key: SORT_WINS_DEC, text: 'by most wins', value: SORT_WINS_DEC }
+]
+
 const BotsPage = () => {
+  const [gridControls, setGridControls] = useState(null)
   const { loading: botsLoading, error: botsError, data: botsData } = useQuery(GET_BOTS)
 
   if (botsLoading) { return <Segment loading padded='very' /> }
   if (botsError) { return <p> An Error occured </p> }
 
   const bots = botsData.bots
-  return <Segment>
-    <Container textAlign='center' style={{ paddingBottom: '3em' }}>
-      <Container style={{ paddingBottom: '2em' }}>
-        <Pagination
-          defaultActivePage={1}
-          firstItem={null}
-          lastItem={null}
-          pointing
-          secondary
-          totalPages={6}
-        />
-      </Container>
-      <BotGrid bots={bots}/>
-    </Container>
-  </Segment>
+  return <FilteredBotGrid
+    bots={bots}
+    sortOptions={sortOptions}
+    defaultSort={SORT_ALPHABETICAL}
+    onChange={(value) => setGridControls(value)}
+    onLoadMore={() => console.log('Load more!')}
+  />
 }
 
 export default BotsPage

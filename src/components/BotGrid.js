@@ -1,6 +1,6 @@
 import React from 'react'
-import { Card, Container } from 'semantic-ui-react'
 import propTypes from 'prop-types'
+import { Card, Container } from 'semantic-ui-react'
 
 import BotItem from './BotItem'
 
