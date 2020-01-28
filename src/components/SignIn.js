@@ -8,12 +8,12 @@ import propTypes from 'prop-types'
 const handleGoogleResponse = (response, client, callback) => {
   // Get token from response
   console.log(response)
-  if (!response.Zi) {
-    throw Error('Google response didnt include Zi property')
+  if (!response.tokenObj) {
+    console.warn('Google response didnt include tokenObj property')
   }
-  const token = response.Zi.id_token
+  const token = response.tokenObj.id_token
   if (!token) {
-    throw Error('Google response didnt include Zi.id_token property')
+    console.warn('Google response didnt include tokenObj.id_token property')
   }
 
   // Send it to backend
