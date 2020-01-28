@@ -17,7 +17,7 @@ const App = () => {
     <Router>
       <Segment basic style={{ minHeight: 700, padding: '1em 0em' }}>
         <TopBar />
-        <Container style={{ padding: '2em 0em' }}>
+        <Container>
           <Switch>
             <Route exact path='/' component={withSuspense(HomePage)} />
             <Route exact path='/bots' component={withSuspense(BotsPage)}/>

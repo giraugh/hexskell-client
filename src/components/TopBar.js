@@ -8,6 +8,10 @@ import {
 
 import AccountAction from './AccountAction'
 
+const leftItemStyle = {
+  alignSelf: 'center'
+}
+
 const TopBar = () => {
   const { pathname } = useLocation()
   return (
@@ -18,8 +22,8 @@ const TopBar = () => {
       style={{ border: 'none' }}
     >
       <Container>
-        <Menu.Item header as={Link} to='/' active={pathname === '/'}>Haskell</Menu.Item>
-        <Menu.Item as={Link} to='/bots' active={pathname === '/bots'}>Bots</Menu.Item>
+        <Menu.Item header as={Link} style={leftItemStyle} to='/' active={pathname === '/'}>Haskell</Menu.Item>
+        <Menu.Item as={Link} to='/bots' style={leftItemStyle} active={pathname === '/bots'}>Bots</Menu.Item>
         <Menu.Item position='right'>
           <AccountAction />
         </Menu.Item>
