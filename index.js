@@ -7,6 +7,7 @@ import { BACK_END_GQL_ADDRESS } from './src/config'
 import App from './src/components/App'
 
 import 'semantic-ui-css/semantic.min.css'
+import './public/index.css'
 
 console.log(`Connecting to Graph QL API @ http://${BACK_END_GQL_ADDRESS}`)
 

@@ -1,0 +1,7 @@
+.segment {
+  background-color: #f5f5f5 !important;
+}
+
+.segment.basic {
+  background-color: white !important;
+}

@@ -17,6 +17,24 @@ export const GET_ME = gql`
     }
   }
 `
+export const GET_ME_DETAILED = gql`
+  {
+    me {
+      id
+      displayName
+      dateJoined
+      avatarURL
+      createdBots {
+        id
+        name
+        author {
+          id
+          avatarURL
+        }
+      }
+    }
+  }
+`
 
 export const GET_USER = gql`
   query getUser($id: ID!) {

@@ -9,6 +9,7 @@ const BotsPage = lazy(() => import('../pages/BotsPage'))
 const BotPage = lazy(() => import('../pages/BotPage'))
 const UserPage = lazy(() => import('../pages/UserPage'))
 const SettingsPage = lazy(() => import('../pages/SettingsPage'))
+const DashboardPage = lazy(() => import('../pages/DashboardPage'))
 
 const withSuspense = (Page) => _ => (<Suspense fallback={<div>loading...</div>}> <Page/> </Suspense>)
 
@@ -24,7 +25,7 @@ const App = () => {
             <Route exact path='/bot/:id' component={withSuspense(BotPage)}/>
             <Route exact path='/user/:id' component={withSuspense(UserPage)}/>
             <Route exact path='/settings' component={withSuspense(SettingsPage)}/>
-            <Route exact path='/dash'></Route>
+            <Route exact path='/dash' component={withSuspense(DashboardPage)}/>
           </Switch>
         </Container>
       </Segment>
