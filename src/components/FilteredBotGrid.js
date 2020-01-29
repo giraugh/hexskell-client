@@ -12,7 +12,7 @@ import {
 
 import BotGrid from './BotGrid'
 
-const FilteredBotGrid = ({ bots, sortOptions, defaultSort, onChange, onLoadMore, ...opts }) => {
+const FilteredBotGrid = ({ bots, sortOptions, defaultSort, onChange, onLoadMore, showLoadMore, ...opts }) => {
   const [filterText, setFilterText] = useState('')
   const [sortOption, setSortOption] = useState(defaultSort)
   const [filterPublished, setFilterPublished] = useState(false)
@@ -69,9 +69,11 @@ const FilteredBotGrid = ({ bots, sortOptions, defaultSort, onChange, onLoadMore,
           </List>
         </Container>
         <BotGrid bots={bots} {...opts}/>
-        <Container style={{ paddingTop: '2em' }}>
-          <Button content="Load More" onClick={onLoadMore} />
-        </Container>
+        {showLoadMore &&
+          <Container style={{ paddingTop: '2em' }}>
+            <Button content="Load More" onClick={onLoadMore} />
+          </Container>
+        }
       </Container>
     </Segment>
   )
@@ -82,7 +84,8 @@ FilteredBotGrid.propTypes = {
   sortOptions: propTypes.arrayOf(propTypes.object),
   defaultSort: propTypes.string,
   onChange: propTypes.func,
-  onLoadMore: propTypes.func
+  onLoadMore: propTypes.func,
+  showLoadMore: propTypes.bool
 }
 
 export default FilteredBotGrid
