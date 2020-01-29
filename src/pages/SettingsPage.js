@@ -1,25 +1,7 @@
 import React, { useState } from 'react'
-import { gql } from 'apollo-boost'
 import { useQuery, useMutation } from '@apollo/react-hooks'
 import { Segment, Header, Form, Container, Button, Message, Divider } from 'semantic-ui-react'
-
-const GET_ME = gql`
-  {
-    me {
-      id
-      displayName
-    }
-  }
-`
-
-const SET_USER = gql`
-  mutation setUser($displayName: String!) {
-    setUser(displayName: $displayName) {
-      id
-      displayName
-    }
-  }
-`
+import { GET_ME, SET_USER } from '../gql/user'
 
 const SettingsPage = () => {
   const { loading, error, data } = useQuery(GET_ME)

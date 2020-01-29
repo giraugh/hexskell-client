@@ -1,22 +1,8 @@
 import React from 'react'
 import { useQuery } from '@apollo/react-hooks'
-import { gql } from 'apollo-boost'
 import { useParams } from 'react-router-dom'
-
 import BotItem from '../components/BotItem'
-
-const GET_BOT = gql`
-  query getBot($id: ID!) {
-    bot(id: $id) {
-      id
-      name
-      author {
-        id
-        displayName
-      }
-    }
-  }
-`
+import { GET_BOT } from '../gql/bot'
 
 const BotPage = () => {
   const { id } = useParams()

@@ -1,18 +1,10 @@
 import React from 'react'
-import { gql } from 'apollo-boost'
 import { useQuery } from '@apollo/react-hooks'
 import { Dropdown, Menu } from 'semantic-ui-react'
 import propTypes from 'prop-types'
-import ProfilePicture from './ProfilePicture'
 
-const GET_ME = gql`
-  {
-    me {
-      id
-      displayName
-    }
-  }
-`
+import ProfilePicture from './ProfilePicture'
+import { GET_ME } from '../gql/user'
 
 const LOGOUT = 1
 const DASHBOARD = 2

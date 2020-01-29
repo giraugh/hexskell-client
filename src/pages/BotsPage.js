@@ -1,41 +1,10 @@
 import React, { useState } from 'react'
 import { useQuery } from '@apollo/react-hooks'
-import { gql } from 'apollo-boost'
 import { Segment } from 'semantic-ui-react'
 import FilteredBotGrid from '../components/FilteredBotGrid'
+import { GET_BOTS } from '../gql/bot'
 
 const BOTS_PER_PAGE = 12
-
-const GET_BOTS = gql`
-  query Bots (
-    $sortBy: BotSorting,
-    $sortOrder: SortOrder,
-    $filters: [BotFilter!],
-    $search: String,
-    $amount: Int,
-    $offset: Int) {
-      bots(input: {
-        sortBy: $sortBy,
-        sortOrder: $sortOrder,
-        filters: $filters,
-        search: $search,
-        amount: $amount,
-        offset: $offset
-      }) {
-        bots {
-          id
-          name
-          author {
-            id
-            displayName
-            avatarURL
-          }
-        }
-        currentPage
-        totalPages
-      }
-  }
-`
 
 const SORT_ALPHABETICAL = 'alphabetical'
 const SORT_WINS_INC = 'wins_inc'
