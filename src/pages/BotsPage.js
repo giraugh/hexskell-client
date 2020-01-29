@@ -56,9 +56,9 @@ const resolveSortOption = (option) => {
     case SORT_ALPHABETICAL:
       return { sortBy: 'ALPHABETICALLY', sortOrder: 'INCREASING' }
     case SORT_WINS_INC:
-      return { sortBy: 'WINS', sortOrder: 'INCREASING' }
+      return { sortBy: 'NUMBER_WINS', sortOrder: 'INCREASING' }
     case SORT_WINS_DEC:
-      return { sortBy: 'WINS', sortOrder: 'DECREASING' }
+      return { sortBy: 'NUMBER_WINS', sortOrder: 'DECREASING' }
     case SORT_DATE_CREATED_INC:
       return { sortBy: 'DATE_CREATED', sortOrder: 'INCREASING' }
     case SORT_DATE_CREATED_DEC:
