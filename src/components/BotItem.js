@@ -47,9 +47,9 @@ const BotItem = ({ data: { id, name, author }, hideAuthor = false, hideBotLink =
           { showEdit
             ? <>
               <Button as={Link} to={`/edit-bot/${id}`}> <Icon name='write' /> Edit </Button>
-              <Button as={Link}> <Icon name='chess' /> Practice Match </Button>
+              <Button as={Link} to={`/match-with/${id}`}> <Icon name='chess' /> Practice Match </Button>
             </> : <>
-              <Button as={Link}> <Icon name='chess' /> Practice Match </Button>
+              <Button as={Link} to={`/match-with/${id}`}> <Icon name='chess' /> Practice Match </Button>
               <Button as={Link} to={`/bot/${id}`}> <Icon name='ellipsis horizontal' /> More </Button>
             </>
           }

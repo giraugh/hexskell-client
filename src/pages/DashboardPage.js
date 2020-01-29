@@ -14,6 +14,10 @@ const statisticListStyle = {
   gridTemplateColumns: `repeat(${NUM_STATISTICS}, 1fr)`
 }
 
+const statisticSegmentStyle = {
+  background: 'white'
+}
+
 const DashboardPage = () => {
   const { data: userData, loading: userLoading, error: userError } = useQuery(GET_ME_DETAILED)
 
@@ -24,7 +28,7 @@ const DashboardPage = () => {
   return (
     <Segment>
       <Header as='h2' dividing> Dashboard </Header>
-      <Segment textAlign='center'>
+      <Segment textAlign='center' style={statisticSegmentStyle}>
         <List horizontal divided style={statisticListStyle}>
           <List.Item> <Statistic label="Total Wins" value={12} /> </List.Item>
           <List.Item> <Statistic style={{ lineHeight: 1 }} label="Best Individual Wins" value={3} /> </List.Item>
