@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useQuery, useMutation } from '@apollo/react-hooks'
-import { Segment, Header, Form, Container, Button, Message, Divider } from 'semantic-ui-react'
+import { Segment, Header, Form, Container, Button, Message } from 'semantic-ui-react'
 import { GET_ME, SET_USER } from '../gql/user'
 
 const SettingsPage = () => {
@@ -10,6 +10,13 @@ const SettingsPage = () => {
   const [errorDisplay, setErrorDisplay] = useState(null)
 
   const handleDisplayNameChange = displayName => {
+    // Must be of a length > 0
+    if (displayName.length === 0 || !displayName) {
+      setErrorDisplay('Display name field is required')
+      return
+    }
+
+    // Perform mutation
     setUser({ variables: { displayName } })
       .then(_ => {
         setErrorDisplay(null)
@@ -32,8 +39,7 @@ const SettingsPage = () => {
   const { displayName } = data.me
   return (
     <Segment>
-      <Header as='h2'> Account Settings </Header>
-      <Divider/>
+      <Header dividing as='h2'> Account Settings </Header>
       <Form error={!!errorDisplay}>
         <Header as='h3'> Display Name </Header>
         Current display name is <b> {displayName} </b>

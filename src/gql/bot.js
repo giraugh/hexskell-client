@@ -5,6 +5,7 @@ export const GET_BOT = gql`
     bot(id: $id) {
       id
       name
+      code
       author {
         id
         displayName
@@ -41,5 +42,21 @@ export const GET_BOTS = gql`
         currentPage
         totalPages
       }
+  }
+`
+
+export const NEW_BOT = gql`
+  mutation newBot($name: String!, $code: String!) {
+    newBot(name: $name, code: $code) {
+      id
+    }
+  }
+`
+
+export const SET_BOT = gql`
+  mutation setBot($id: ID!, $name: String!, $code: String!) {
+    setBot(id: $id, name: $name, code: $code) {
+      id
+    }
   }
 `
