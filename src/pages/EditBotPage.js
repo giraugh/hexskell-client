@@ -16,8 +16,11 @@ const EditBotPage = ({ isContinue }) => {
   const [setBot] = useMutation(SET_BOT)
 
   const handleBotLoaded = ({ bot }) => {
+    // Set name
+    setNameInput(bot.name || '')
+
+    // Set code but don't override if never set before
     if (!isContinue) {
-      setNameInput(bot.name || '')
       setCodeInput(bot.code || '')
     }
   }
@@ -43,7 +46,7 @@ const EditBotPage = ({ isContinue }) => {
       return
     }
 
-    setBot({ variables: { id: botData.bot.id, name: nameInput, code: codeInput }})
+    setBot({ variables: { id: botData.bot.id, name: nameInput, code: codeInput } })
       .catch(error => {
         error.graphQLErrors.forEach(err => {
           console.log(JSON.stringify(err))
