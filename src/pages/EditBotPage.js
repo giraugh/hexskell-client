@@ -9,7 +9,7 @@ import { BotCodeEditor } from '../components/BotCodeDisplay'
 
 const DO_NOTHING = () => {}
 
-const EditBotPage = ({ isContinue, botID, redirect = false, handleDidSubmit = DO_NOTHING }) => {
+const EditBotPage = ({ isContinue, botID, redirect = true, handleDidSubmit = DO_NOTHING }) => {
   const { id: pageID } = useParams()
   const id = botID || pageID // Can be used as modal, where id is passed as prop
   const [nameInput, setNameInput] = useState('')
