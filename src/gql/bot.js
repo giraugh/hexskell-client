@@ -60,3 +60,11 @@ export const SET_BOT = gql`
     }
   }
 `
+
+export const REMOVE_BOT = gql`
+  mutation removeBot($id: ID!) {
+    removeBot(id: $id) {
+      id
+    }
+  }
+`

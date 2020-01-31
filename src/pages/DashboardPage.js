@@ -1,11 +1,13 @@
-import React from 'react'
-import { useQuery } from '@apollo/react-hooks'
-import { Header, Segment, Statistic, List, Button, Icon, Message } from 'semantic-ui-react'
+import React, { useState } from 'react'
+import { useQuery, useMutation } from '@apollo/react-hooks'
+import { Header, Segment, Statistic, List, Button, Icon, Message, Confirm, Modal } from 'semantic-ui-react'
 
 import BotGrid from '../components/BotGrid'
 import { GET_ME_DETAILED } from '../gql/user'
+import { REMOVE_BOT } from '../gql/bot'
 import { Link } from 'react-router-dom'
 import { isLoggedIn } from '../hooks/authentication'
+import EditBotPage from './EditBotPage'
 
 const NUM_STATISTICS = 4
 
@@ -19,7 +21,21 @@ const statisticSegmentStyle = {
 }
 
 const DashboardPage = () => {
-  const { data: userData, loading: userLoading, error: userError } = useQuery(GET_ME_DETAILED)
+  const { data: userData, loading: userLoading, error: userError, refetch: refetchUser } = useQuery(GET_ME_DETAILED)
+  const [removeBot] = useMutation(REMOVE_BOT)
+  const [removingID, setRemovingID] = useState(null)
+  const [editingID, setEditingID] = useState(null)
+
+  const handleEditModalClose = () => {
+    setEditingID(null)
+  }
+
+  const handleDeleteBot = _ => {
+    const id = removingID
+    removeBot({ variables: { id } })
+      .then(_ => console.log(`removed bot with id: ${id}`))
+      .then(_ => refetchUser())
+  }
 
   if (!isLoggedIn()) {
     return <Message error> <Message.Header> Unauthorized </Message.Header> Must be logged-in to view dashboard. </Message>
@@ -27,6 +43,23 @@ const DashboardPage = () => {
 
   return (
     <Segment>
+      <Confirm
+        open={!!removingID}
+        onConfirm={_ => { handleDeleteBot(); setRemovingID(null) }}
+        onCancel={_ => setRemovingID(null) }
+      />
+      <Modal
+        open={!!editingID}
+        onClose={handleEditModalClose}
+        basic
+      >
+        <EditBotPage
+          isContinue={false}
+          botID={editingID}
+          redirect={false}
+          handleDidSubmit={() => { setEditingID(null); refetchUser() }}
+        />
+      </Modal>
       <Header as='h2' dividing> Dashboard </Header>
       <Segment textAlign='center' style={statisticSegmentStyle}>
         <List horizontal divided style={statisticListStyle}>
@@ -52,6 +85,8 @@ const DashboardPage = () => {
             hideAuthor={true}
             showEdit={true}
             showButtons={true}
+            handleDeleteBot={id => setRemovingID(id)}
+            handleEditBot={id => setEditingID(id)}
           />
       }
     </Segment>

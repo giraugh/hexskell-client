@@ -7,8 +7,11 @@ import { useQuery, useMutation } from '@apollo/react-hooks'
 import { GET_BOT, SET_BOT } from '../gql/bot'
 import BotCodeEditor from '../components/BotCodeEditor'
 
-const EditBotPage = ({ isContinue }) => {
-  const { id } = useParams()
+const DO_NOTHING = () => {}
+
+const EditBotPage = ({ isContinue, botID, redirect = false, handleDidSubmit = DO_NOTHING }) => {
+  const { id: pageID } = useParams()
+  const id = botID || pageID // Can be used as modal, where id is passed as prop
   const [nameInput, setNameInput] = useState('')
   const [codeInput, setCodeInput] = useState('')
   const [redirectTo, setRedirectTo] = useState(null)
@@ -60,7 +63,8 @@ const EditBotPage = ({ isContinue }) => {
       .then(({ data }) => {
         setErrorDisplay(null)
         console.log(data)
-        setRedirectTo(`/bot/${data.setBot.id}`)
+        if (redirect) { setRedirectTo(`/bot/${data.setBot.id}`) }
+        handleDidSubmit(data)
       })
   }
 
@@ -112,7 +116,10 @@ const EditBotPage = ({ isContinue }) => {
 }
 
 EditBotPage.propTypes = {
-  isContinue: propTypes.bool
+  isContinue: propTypes.bool,
+  botID: propTypes.string,
+  redirect: propTypes.bool,
+  handleDidSubmit: propTypes.func
 }
 
 export default EditBotPage
