@@ -12,11 +12,21 @@ import {
 
 import BotGrid from './BotGrid'
 
-const FilteredBotGrid = ({ bots, sortOptions, defaultSort, onChange, onLoadMore, showLoadMore, ...opts }) => {
+const FilteredBotGrid = ({
+  bots,
+  sortOptions,
+  defaultSort,
+  defaultPublished = false,
+  defaultMine = false,
+  onChange,
+  onLoadMore,
+  showLoadMore,
+  ...opts
+}) => {
   const [filterText, setFilterText] = useState('')
   const [sortOption, setSortOption] = useState(defaultSort)
-  const [filterPublished, setFilterPublished] = useState(false)
-  const [filterMine, setFilterMine] = useState(false)
+  const [filterPublished, setFilterPublished] = useState(defaultPublished)
+  const [filterMine, setFilterMine] = useState(defaultMine)
   const [stateDidChange, setStateDidChange] = useState(false)
 
   const handleStateChange = () => setStateDidChange(true)
@@ -83,6 +93,8 @@ FilteredBotGrid.propTypes = {
   bots: propTypes.arrayOf(propTypes.object),
   sortOptions: propTypes.arrayOf(propTypes.object),
   defaultSort: propTypes.string,
+  defaultPublished: propTypes.bool,
+  defaultMine: propTypes.bool,
   onChange: propTypes.func,
   onLoadMore: propTypes.func,
   showLoadMore: propTypes.bool

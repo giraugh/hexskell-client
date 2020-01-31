@@ -37,7 +37,9 @@ const resolveSortOption = (option) => {
 }
 
 const defaultGridControls = {
-  sortOption: SORT_ALPHABETICAL
+  sortOption: SORT_ALPHABETICAL,
+  filterPublished: true,
+  filterMine: false
 }
 
 const BotsPage = () => {
@@ -100,6 +102,8 @@ const BotsPage = () => {
     bots={bots}
     sortOptions={sortOptions}
     defaultSort={defaultGridControls.sortOption}
+    defaultMine={defaultGridControls.filterMine}
+    defaultPublished={defaultGridControls.filterPublished}
     onChange={handleControlsChanged}
     showLoadMore={!loadedAll}
     onLoadMore={handleLoadMore(bots.length)}
