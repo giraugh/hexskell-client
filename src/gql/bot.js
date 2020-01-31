@@ -34,6 +34,7 @@ export const GET_BOTS = gql`
         bots {
           id
           name
+          published
           author {
             id
             displayName
