@@ -5,7 +5,7 @@ import propTypes from 'prop-types'
 import { useQuery, useMutation } from '@apollo/react-hooks'
 
 import { GET_BOT, SET_BOT } from '../gql/bot'
-import BotCodeEditor from '../components/BotCodeEditor'
+import { BotCodeEditor } from '../components/BotCodeDisplay'
 
 const DO_NOTHING = () => {}
 

@@ -6,6 +6,7 @@ export const GET_BOT = gql`
       id
       name
       code
+      published
       author {
         id
         displayName
