@@ -4,10 +4,6 @@ import { Link } from 'react-router-dom'
 import { Card, List, Button, Icon } from 'semantic-ui-react'
 import ProfilePicture from './ProfilePicture'
 
-// const IMG_SRC = 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2F736x%2F32%2F5b%2F5a%2F325b5a537d7f9edf317eed7354853160--neon-genesis-evangelion-minimalism.jpg&f=1&nofb=1'
-const PLACEHOLDER_WINS = 12
-const PLACEHOLDER_RANK = 3
-
 const cardStyle = {
   width: '95%',
   textAlign: 'start',
@@ -25,7 +21,7 @@ const buttonsStyle = {
 
 const DO_NOTHING = () => {}
 
-const BotItem = ({ data: { id, name, author, published }, handleDeleteBot = DO_NOTHING, handleEditBot = DO_NOTHING, hideAuthor = false, hideBotLink = false, showEdit = false, showButtons = false }) => (
+const BotItem = ({ data: { id, name, author, published, wins, ties, ranking }, handleDeleteBot = DO_NOTHING, handleEditBot = DO_NOTHING, hideAuthor = false, hideBotLink = false, showEdit = false, showButtons = false }) => (
   <Card style={cardStyle}>
     <Card.Content>
       <ProfilePicture user={author} doFloat={true} />
@@ -38,11 +34,11 @@ const BotItem = ({ data: { id, name, author, published }, handleDeleteBot = DO_N
       {published
         ? <>
           <List horizontal>
-            <List.Item> {PLACEHOLDER_WINS} wins </List.Item>
+            <List.Item> {wins} wins </List.Item>
             <List.Item>-</List.Item>
-            <List.Item> {PLACEHOLDER_WINS / 2} ties </List.Item>
+            <List.Item> ranked #{ranking} </List.Item>
             <List.Item>-</List.Item>
-            <List.Item> ranked #{PLACEHOLDER_RANK} </List.Item>
+            <List.Item> {ties} ties </List.Item>
           </List>
         </> : <>
           <span> - Not Yet Published - </span>

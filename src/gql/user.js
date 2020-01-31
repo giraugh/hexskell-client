@@ -27,6 +27,10 @@ export const GET_ME_DETAILED = gql`
       createdBots {
         id
         name
+        published
+        wins
+        ties
+        ranking
         author {
           id
           avatarURL

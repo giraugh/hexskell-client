@@ -7,6 +7,9 @@ export const GET_BOT = gql`
       name
       code
       published
+      wins
+      ties
+      ranking
       author {
         id
         displayName
@@ -35,6 +38,9 @@ export const GET_BOTS = gql`
           id
           name
           published
+          wins
+          ties
+          ranking
           author {
             id
             displayName
