@@ -25,7 +25,7 @@ const buttonsStyle = {
 
 const DO_NOTHING = () => {}
 
-const BotItem = ({ data: { id, name, author }, handleDeleteBot = DO_NOTHING, handleEditBot = DO_NOTHING, hideAuthor = false, hideBotLink = false, showEdit = false, showButtons = false }) => (
+const BotItem = ({ data: { id, name, author, published }, handleDeleteBot = DO_NOTHING, handleEditBot = DO_NOTHING, hideAuthor = false, hideBotLink = false, showEdit = false, showButtons = false }) => (
   <Card style={cardStyle}>
     <Card.Content>
       <ProfilePicture user={author} doFloat={true} />
@@ -35,13 +35,19 @@ const BotItem = ({ data: { id, name, author }, handleDeleteBot = DO_NOTHING, han
       }
     </Card.Content>
     <Card.Content extra textAlign='center' style={statisticsStyle}>
-      <List horizontal>
-        <List.Item> {PLACEHOLDER_WINS} wins </List.Item>
-        <List.Item>-</List.Item>
-        <List.Item> {PLACEHOLDER_WINS / 2} ties </List.Item>
-        <List.Item>-</List.Item>
-        <List.Item> ranked #{PLACEHOLDER_RANK} </List.Item>
-      </List>
+      {published
+        ? <>
+          <List horizontal>
+            <List.Item> {PLACEHOLDER_WINS} wins </List.Item>
+            <List.Item>-</List.Item>
+            <List.Item> {PLACEHOLDER_WINS / 2} ties </List.Item>
+            <List.Item>-</List.Item>
+            <List.Item> ranked #{PLACEHOLDER_RANK} </List.Item>
+          </List>
+        </> : <>
+          <span> - Not Yet Published - </span>
+        </>
+      }
     </Card.Content>
     {showButtons &&
       <Card.Content extra style={buttonsStyle}>
