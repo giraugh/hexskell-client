@@ -62,16 +62,28 @@ const DashboardPage = () => {
         open={!!removingID}
         onConfirm={_ => { handleDeleteBot(); setRemovingID(null) }}
         onCancel={_ => setRemovingID(null) }
+        header='Remove Bot?'
+        content='Are you sure you want to remove this bot? It will be lost permanently.'
+        confirmButton='Remove'
+        size='large'
       />
       <Confirm
         open={!!unpublishingID}
         onConfirm={_ => { handleUnpublishBot(); setUnpublishingID(null) }}
         onCancel={_ => setUnpublishingID(null) }
+        header='Unpublish Bot?'
+        content='Are you sure you want to unpublish this bot? Doing so will reset its wins and match statistics.'
+        confirmButton='Unpublish'
+        size='large'
       />
       <Confirm
         open={!!publishingID}
         onConfirm={_ => { handlePublishBot(); setPublishingID(null) }}
         onCancel={_ => setPublishingID(null) }
+        header='Publish Bot?'
+        content='A bot cannot be edited while its published and publishing may take a few minutes. Are you sure you want to publish this bot?'
+        confirmButton='Publish'
+        size='large'
       />
       <Modal
         open={!!editingID}
