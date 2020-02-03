@@ -21,6 +21,7 @@ const FilteredBotGrid = ({
   onChange,
   onLoadMore,
   showLoadMore,
+  disableMine = false,
   ...opts
 }) => {
   const [filterText, setFilterText] = useState('')
@@ -69,13 +70,15 @@ const FilteredBotGrid = ({
                 onChange={(_, { checked }) => { setFilterPublished(checked); handleStateChange() }}
               />
             </List.Item>
-            <List.Item>
-              <Checkbox
-                label='Mine'
-                checked={filterMine}
-                onChange={(_, { checked }) => { setFilterMine(checked); handleStateChange() }}
-              />
-            </List.Item>
+            {!disableMine &&
+              <List.Item>
+                <Checkbox
+                  label='Mine'
+                  checked={filterMine}
+                  onChange={(_, { checked }) => { setFilterMine(checked); handleStateChange() }}
+                />
+              </List.Item>
+            }
           </List>
         </Container>
         <BotGrid bots={bots} {...opts}/>
@@ -97,7 +100,8 @@ FilteredBotGrid.propTypes = {
   defaultMine: propTypes.bool,
   onChange: propTypes.func,
   onLoadMore: propTypes.func,
-  showLoadMore: propTypes.bool
+  showLoadMore: propTypes.bool,
+  disableMine: propTypes.bool
 }
 
 export default FilteredBotGrid

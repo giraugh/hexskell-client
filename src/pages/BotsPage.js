@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useQuery } from '@apollo/react-hooks'
 import { Segment } from 'semantic-ui-react'
+import { isLoggedIn } from '../hooks/authentication'
 import FilteredBotGrid from '../components/FilteredBotGrid'
 import { GET_BOTS } from '../gql/bot'
 
@@ -97,6 +98,8 @@ const BotsPage = () => {
   if (botsLoading && !botsData) { return <Segment loading padded='very' /> }
   if (botsError) { return <p> An Error occured </p> }
 
+  const loggedIn = isLoggedIn()
+
   const bots = botsData.bots.bots
   return <FilteredBotGrid
     bots={bots}
@@ -107,6 +110,7 @@ const BotsPage = () => {
     onChange={handleControlsChanged}
     showLoadMore={!loadedAll}
     onLoadMore={handleLoadMore(bots.length)}
+    disableMine={!loggedIn}
   />
 }
 
