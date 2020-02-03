@@ -37,7 +37,12 @@ export const Statistics = ({ stats }) => (
 )
 
 export const UserStatistics = ({ id }) => {
-  const { loading: statsLoading, error: statsError, data: statsData } = useQuery(GET_MY_STATS)
+  const { loading: statsLoading, error: statsError, data: statsData } = useQuery(
+    GET_MY_STATS,
+    {
+      pollInterval: 5000
+    }
+  )
 
   const placeholderStats = [
     { label: 'Total Wins', value: 0 },
@@ -63,7 +68,8 @@ export const BotStatistics = ({ id }) => {
   const { loading: statsLoading, error: statsError, data: statsData } = useQuery(
     GET_BOT_STATS,
     {
-      variables: { id }
+      variables: { id },
+      pollInterval: 5000
     }
   )
 
