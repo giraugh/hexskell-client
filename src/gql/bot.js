@@ -19,7 +19,7 @@ export const GET_BOT = gql`
 `
 
 export const GET_BOTS = gql`
-  query Bots (
+  query bots (
     $sortBy: BotSorting,
     $sortOrder: SortOrder,
     $filters: [BotFilter!],
@@ -50,6 +50,17 @@ export const GET_BOTS = gql`
         currentPage
         totalPages
       }
+  }
+`
+
+export const GET_BOT_STATS = gql`
+  query getBotStatistics($id: ID!) {
+    botStatistics(id: $id) {
+      wins,
+      ties,
+      ranking,
+      numMatches
+    }
   }
 `
 

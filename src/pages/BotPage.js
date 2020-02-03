@@ -1,21 +1,11 @@
 import React from 'react'
 import { useQuery } from '@apollo/react-hooks'
 import { useParams, Link } from 'react-router-dom'
-import { Segment, Header, Container, Divider, List, Statistic } from 'semantic-ui-react'
+import { Segment, Header, Container, Divider } from 'semantic-ui-react'
 
 import { GET_BOT } from '../gql/bot'
 import { BotCodeViewer } from '../components/BotCodeDisplay'
-
-const NUM_STATISTICS = 4
-
-const statisticListStyle = {
-  display: 'grid',
-  gridTemplateColumns: `repeat(${NUM_STATISTICS}, 1fr)`
-}
-
-const statisticSegmentStyle = {
-  background: 'white'
-}
+import { BotStatistics } from '../components/Statistics'
 
 const BotPage = () => {
   const { id } = useParams()
@@ -28,29 +18,25 @@ const BotPage = () => {
   return (
     <Segment>
       <Container>
-        <Header as='h2' style={{ marginBottom: '3px' }}>
+        <Header as='h2' style={{ marginBottom: '3px', fontStyle: published ? 'none' : 'italic' }}>
           { name }
         </Header>
-        <span className='author'>Created by <Link to={`/user/${author.id}`}>{author.displayName}</Link> </span>
+        <span className='author'>
+          Created by
+          <Link to={`/user/${author.id}`}> {author.displayName} </Link>
+          {!published &&
+            <span> and is <span style={{ fontStyle: 'italic' }}> not published</span> yet </span>
+          }
+        </span>
         <Divider/>
       </Container>
 
-      <Segment textAlign='center' style={statisticSegmentStyle}>
-        {published
-          ? <>
-            <List horizontal divided style={statisticListStyle}>
-              <List.Item> <Statistic label="Wins" value={12} /> </List.Item>
-              <List.Item> <Statistic label="Ties" value={2}/> </List.Item>
-              <List.Item> <Statistic label="Ranked" value={`#${5}`} /> </List.Item>
-              <List.Item> <Statistic label="Total Matches" value={25} /> </List.Item>
-            </List>
-          </> : <>
-            <Header as='h3'> Not Published Yet </Header>
-          </>
-        }
-      </Segment>
-
-      <Divider/>
+      { published &&
+        <>
+          <BotStatistics id={id} />
+          <Divider/>
+        </>
+      }
 
       <BotCodeViewer value={code} />
 

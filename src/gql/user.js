@@ -50,11 +50,37 @@ export const GET_USER = gql`
       createdBots {
         id
         name
+        published
+        wins
+        ties
+        ranking
         author {
           id
           avatarURL
         }
       }
+    }
+  }
+`
+
+export const GET_USER_STATS = gql`
+  query getUserStats($id: ID!) {
+    userStatistics(id: $id) {
+      totalWins,
+      bestRanking,
+      bestIndividualWins,
+      botCount
+    }
+  }
+`
+
+export const GET_MY_STATS = gql`
+  query getMyStatistics {
+    myStatistics {
+      totalWins,
+      bestRanking,
+      bestIndividualWins,
+      botCount
     }
   }
 `

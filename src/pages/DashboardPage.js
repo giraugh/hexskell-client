@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useQuery, useMutation } from '@apollo/react-hooks'
-import { Header, Segment, Statistic, List, Button, Icon, Message, Confirm, Modal } from 'semantic-ui-react'
+import { Header, Segment, Button, Icon, Message, Confirm, Modal } from 'semantic-ui-react'
 
 import BotGrid from '../components/BotGrid'
 import { GET_ME_DETAILED } from '../gql/user'
@@ -8,17 +8,7 @@ import { REMOVE_BOT } from '../gql/bot'
 import { Link } from 'react-router-dom'
 import { isLoggedIn } from '../hooks/authentication'
 import EditBotPage from './EditBotPage'
-
-const NUM_STATISTICS = 4
-
-const statisticListStyle = {
-  display: 'grid',
-  gridTemplateColumns: `repeat(${NUM_STATISTICS}, 1fr)`
-}
-
-const statisticSegmentStyle = {
-  background: 'white'
-}
+import { UserStatistics } from '../components/Statistics'
 
 const DashboardPage = () => {
   const { data: userData, loading: userLoading, error: userError, refetch: refetchUser } = useQuery(GET_ME_DETAILED)
@@ -60,21 +50,17 @@ const DashboardPage = () => {
           handleDidSubmit={() => { setEditingID(null); refetchUser() }}
         />
       </Modal>
+
       <Header as='h2' dividing> Dashboard </Header>
-      <Segment textAlign='center' style={statisticSegmentStyle}>
-        <List horizontal divided style={statisticListStyle}>
-          <List.Item> <Statistic label="Total Wins" value={12} /> </List.Item>
-          <List.Item> <Statistic style={{ lineHeight: 1 }} label="Best Individual Wins" value={3} /> </List.Item>
-          <List.Item> <Statistic label="Best Ranking" value={'#5'} /> </List.Item>
-          <List.Item> <Statistic label="Bots" value={7} /> </List.Item>
-        </List>
-      </Segment>
+
+      <UserStatistics />
+
       <Button.Group fluid size='large' widths={4}>
         <Button as={Link} to='/create-bot'><Icon name='write'/> Create New Bot</Button>
         <Button as={Link} to='/settings'><Icon name='cog' /> Account Settings</Button>
         <Button as={Link} to='/help'><Icon name='question' /> Help</Button>
-        {/* <Button><Icon name='sign-out' /> Logout</Button> */}
       </Button.Group>
+
       <Header dividing as='h3'> My Bots </Header>
       {(userLoading && !userData)
         ? <Segment loading padded='very' />
