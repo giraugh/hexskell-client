@@ -87,3 +87,21 @@ export const REMOVE_BOT = gql`
     }
   }
 `
+
+export const UNPUBLISH_BOT = gql`
+  mutation unpublishBot($id: ID!) {
+    unpublishBot(id: $id) {
+      id
+      published
+    }
+  }
+`
+export const PUBLISH_BOT = gql`
+  mutation publishBot($id: ID!) {
+    publishBot(id: $id) {
+      id
+      published
+      publishingStatus
+    }
+  }
+`

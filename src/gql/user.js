@@ -28,6 +28,7 @@ export const GET_ME_DETAILED = gql`
         id
         name
         published
+        publishingStatus
         wins
         ties
         ranking

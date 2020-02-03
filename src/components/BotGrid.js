@@ -6,7 +6,7 @@ import BotItem from './BotItem'
 
 const groupStyle = {
   display: 'grid',
-  gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
+  gridTemplateColumns: 'repeat(auto-fill, minmax(400px, 1fr))',
   justifyItems: 'center',
   margin: 'auto'
 }
