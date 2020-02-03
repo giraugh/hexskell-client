@@ -11,8 +11,9 @@ const cardStyle = {
 }
 
 const statisticsStyle = {
-  lineHeight: '100%',
-  padding: '2px'
+  lineHeight: '27px',
+  padding: '0px',
+  maxHeight: '27px'
 }
 
 const buttonsStyle = {
