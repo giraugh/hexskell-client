@@ -28,19 +28,15 @@ const BotPage = () => {
             <span> and is <span style={{ fontStyle: 'italic' }}> not published</span> yet </span>
           }
         </span>
-        <Divider/>
       </Container>
 
       { published &&
         <>
           <BotStatistics id={id} />
-          <Divider/>
         </>
       }
 
       <BotCodeViewer value={code} />
-
-      <Divider />
 
       <Segment>
         <Header> Detailed Stats </Header>
