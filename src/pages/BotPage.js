@@ -1,7 +1,7 @@
 import React from 'react'
 import { useQuery } from '@apollo/react-hooks'
 import { useParams, Link } from 'react-router-dom'
-import { Segment, Header, Container, Divider } from 'semantic-ui-react'
+import { Segment, Header, Container } from 'semantic-ui-react'
 
 import { GET_BOT } from '../gql/bot'
 import { BotCodeViewer } from '../components/BotCodeDisplay'
@@ -38,14 +38,16 @@ const BotPage = () => {
 
       <BotCodeViewer value={code} />
 
-      <Segment>
-        <Header> Detailed Stats </Header>
-        <BotDetailedStatistics id={id} />
-      </Segment>
+      { published && <>
+        <Segment>
+          <Header> Detailed Stats </Header>
+          <BotDetailedStatistics id={id} />
+        </Segment>
 
-      <Segment>
-        <Header > Matches </Header>
-      </Segment>
+        <Segment>
+          <Header > Matches </Header>
+        </Segment>
+      </> }
 
     </Segment>
   )
