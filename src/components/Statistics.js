@@ -1,9 +1,9 @@
 import React from 'react'
-import { Segment, List, Statistic } from 'semantic-ui-react'
+import { Segment, List, Statistic, Table } from 'semantic-ui-react'
 import propTypes from 'prop-types'
 import { useQuery } from '@apollo/react-hooks'
 import { GET_MY_STATS } from '../gql/user'
-import { GET_BOT_STATS } from '../gql/bot'
+import { GET_BOT_STATS, GET_BOT_STATS_DETAILED } from '../gql/bot'
 
 const statisticListStyle = num => ({
   display: 'grid',
@@ -93,11 +93,74 @@ export const BotStatistics = ({ id }) => {
   return <Statistics stats={ready ? botStats : placeholderStats} />
 }
 
+export const BotDetailedStatistics = ({ id }) => {
+  const { loading: statsLoading, error: statsError, data: statsData } = useQuery(
+    GET_BOT_STATS_DETAILED,
+    {
+      variables: { id },
+      pollInterval: 5000
+    }
+  )
+
+  const statsFromData = ({
+    botStatistics: {
+      wins,
+      ties,
+      losses,
+      ranking,
+      winRate,
+      winRateRed,
+      winRateBlue,
+      averageGameLength
+    }
+  }) => ([
+    { label: 'Wins', value: wins },
+    { label: 'Ties', value: ties },
+    { label: 'Losses', value: losses },
+    { label: 'Ranking', valuePrefix: '#', value: ranking },
+    { label: 'Win Rate', valueSuffix: '%', value: winRate * 100 },
+    { label: 'Win Rate As Red', valueSuffix: '%', value: winRateBlue * 100 },
+    { label: 'Win Rate As Blue', valueSuffix: '%', value: winRateRed * 100 },
+    { label: 'Mean Game Length', valueSuffix: ' turns', value: averageGameLength }
+  ])
+
+  const placeHolderStats = [
+    { label: 'Wins', value: 0 },
+    { label: 'Ties', value: 0 },
+    { label: 'Losses', value: 0 },
+    { label: 'Ranking', valuePrefix: '#', value: '?' },
+    { label: 'Win Rate', valueSuffix: '%', value: '?' },
+    { label: 'Win Rate As Red', valueSuffix: '%', value: '?' },
+    { label: 'Win Rate As Blue', valueSuffix: '%', value: '?' },
+    { label: 'Mean Game Length', valueSuffix: ' turns', value: '?' }
+  ]
+
+  const ready = !statsLoading && !statsError && statsData
+  const stats = ready ? statsFromData(statsData) : placeHolderStats
+
+  return (
+    <Table celled striped>
+      <Table.Body>
+        {stats.map(({ label, value, valuePrefix, valueSuffix }) => (
+          <Table.Row key={label}>
+            <Table.Cell collapsing style={{ fontWeight: 'bold' }}> { label } </Table.Cell>
+            <Table.Cell>  { valuePrefix }{ value }{ valueSuffix } </Table.Cell>
+          </Table.Row>
+        ))}
+      </Table.Body>
+    </Table>
+  )
+}
+
 Statistics.propTypes = {
   stats: propTypes.array
 }
 
 BotStatistics.propTypes = {
+  id: propTypes.string
+}
+
+BotDetailedStatistics.propTypes = {
   id: propTypes.string
 }
 

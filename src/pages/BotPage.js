@@ -5,7 +5,7 @@ import { Segment, Header, Container, Divider } from 'semantic-ui-react'
 
 import { GET_BOT } from '../gql/bot'
 import { BotCodeViewer } from '../components/BotCodeDisplay'
-import { BotStatistics } from '../components/Statistics'
+import { BotStatistics, BotDetailedStatistics } from '../components/Statistics'
 
 const BotPage = () => {
   const { id } = useParams()
@@ -39,6 +39,17 @@ const BotPage = () => {
       }
 
       <BotCodeViewer value={code} />
+
+      <Divider />
+
+      <Segment>
+        <Header> Detailed Stats </Header>
+        <BotDetailedStatistics id={id} />
+      </Segment>
+
+      <Segment>
+        <Header > Matches </Header>
+      </Segment>
 
     </Segment>
   )
