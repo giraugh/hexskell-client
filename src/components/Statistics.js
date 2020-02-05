@@ -18,6 +18,8 @@ const longLabelStyle = {
   lineHeight: 1
 }
 
+const roundTo = (x, n = 2) => Math.round(x * (10 ** n)) / (10 ** n)
+
 export const Statistics = ({ stats }) => (
   <Segment textAlign='center' style={statisticSegmentStyle}>
     <List horizontal divided style={statisticListStyle(stats.length)}>
@@ -118,10 +120,10 @@ export const BotDetailedStatistics = ({ id }) => {
     { label: 'Ties', value: ties },
     { label: 'Losses', value: losses },
     { label: 'Ranking', valuePrefix: '#', value: ranking },
-    { label: 'Win Rate', valueSuffix: '%', value: winRate * 100 },
-    { label: 'Win Rate As Red', valueSuffix: '%', value: winRateBlue * 100 },
-    { label: 'Win Rate As Blue', valueSuffix: '%', value: winRateRed * 100 },
-    { label: 'Mean Game Length', valueSuffix: ' turns', value: averageGameLength }
+    { label: 'Win Rate', valueSuffix: '%', value: roundTo(winRate * 100, 1) },
+    { label: 'Win Rate As Red', valueSuffix: '%', value: roundTo(winRateBlue * 100, 1) },
+    { label: 'Win Rate As Blue', valueSuffix: '%', value: roundTo(winRateRed * 100, 1) },
+    { label: 'Mean Game Length', valueSuffix: ' turns', value: roundTo(averageGameLength, 1) }
   ])
 
   const placeHolderStats = [
