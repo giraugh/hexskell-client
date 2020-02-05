@@ -81,6 +81,32 @@ export const GET_BOT_STATS_DETAILED = gql`
   }
 `
 
+export const GET_BOT_W_MATCHES = gql`
+  query getBotWithMatches($id: ID!) {
+    bot(id: $id) {
+      id
+      name
+      tournamentMatches {
+        id
+        competitors {
+          id
+          name
+        }
+        winningCompetitor {
+          id
+          name
+        }
+        rounds {
+          winningCompetitor {
+            id
+            name
+          }
+        }
+      }
+    }
+  }
+`
+
 export const NEW_BOT = gql`
   mutation newBot($name: String!, $code: String!) {
     newBot(name: $name, code: $code) {
