@@ -38,15 +38,18 @@ const BotMatches = ({ id }) => {
   const myName = ready ? botData.bot.name : ''
 
   return (
-    <Table>
+    <Table celled structured>
       <Table.Header>
         <Table.Row>
-          <Table.HeaderCell> Competing Against </Table.HeaderCell>
+          <Table.HeaderCell rowSpan='2'> Competing Against </Table.HeaderCell>
+          <Table.HeaderCell rowSpan='2'> Winner </Table.HeaderCell>
+          <Table.HeaderCell colSpan='4'> Round Winners </Table.HeaderCell>
+        </Table.Row>
+        <Table.Row>
           <Table.HeaderCell> Round 1 </Table.HeaderCell>
           <Table.HeaderCell> Round 2 </Table.HeaderCell>
           <Table.HeaderCell> Round 3 </Table.HeaderCell>
           <Table.HeaderCell> Round 4 </Table.HeaderCell>
-          <Table.HeaderCell> Winner </Table.HeaderCell>
         </Table.Row>
       </Table.Header>
       <Table.Body>
@@ -64,12 +67,12 @@ const BotMatches = ({ id }) => {
               key={title}
             >
               <Table.Cell> { otherCompetitor.name } </Table.Cell>
+              <Table.Cell> { !isTie ? winningCompetitor.name : '- Tie -' } </Table.Cell>
               {rounds.map(({ winningCompetitor: wc }, i) => (
                 <Table.Cell key={i}>
                   { (wc || { name: '?' }).name }
                 </Table.Cell>
               ))}
-              <Table.Cell> { !isTie ? winningCompetitor.name : '- Tie -' } </Table.Cell>
             </Table.Row>
           )
         })}
