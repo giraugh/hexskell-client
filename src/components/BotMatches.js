@@ -2,6 +2,7 @@ import React from 'react'
 import propTypes from 'prop-types'
 import { Table } from 'semantic-ui-react'
 import { useQuery } from '@apollo/react-hooks'
+import { Link } from 'react-router-dom'
 
 import { GET_BOT_W_MATCHES } from '../gql/bot'
 
@@ -66,7 +67,7 @@ const BotMatches = ({ id }) => {
               warning={isTie}
               key={title}
             >
-              <Table.Cell> { otherCompetitor.name } </Table.Cell>
+              <Table.Cell> <Link to={`/bot/${otherCompetitor.id}`}> { otherCompetitor.name } </Link> </Table.Cell>
               <Table.Cell> { !isTie ? winningCompetitor.name : '- Tie -' } </Table.Cell>
               {rounds.map(({ winningCompetitor: wc }, i) => (
                 <Table.Cell key={i}>
