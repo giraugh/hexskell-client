@@ -11,7 +11,7 @@ const ViewMatchPage = ({ id }) => {
 }
 
 ViewMatchPage.propTypes = {
-  id: propTypes.object
+  id: propTypes.string
 }
 
 export default ViewMatchPage
