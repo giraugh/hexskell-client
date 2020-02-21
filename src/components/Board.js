@@ -35,13 +35,30 @@ const Board = ({ boardData }) => {
 
 const BoardHex = ({ i, poly, gridSize, boardData }) => {
   const { red, blue } = boardData
-  const xPos = 1 + i % gridSize
-  const yPos = 1 + Math.floor(i / gridSize)
+  const xPos = 1 + Math.floor(i / gridSize)
+  const yPos = 1 + i % gridSize
   const isRed = !!red.some(({ x, y }) => x === xPos && y === yPos)
   const isBlue = !isRed && !!blue.some(({ x, y }) => x === xPos && y === yPos)
   return (
     <polygon points={poly} style={{ fill: isRed ? redHex : (isBlue ? blueHex : greyHex) }}/>
   )
+}
+
+export const transformBoardData = ({ red, blue }) => {
+  return {
+    red: red.map(([x, y]) => ({ x, y })),
+    blue: blue.map(([x, y]) => ({ x, y }))
+  }
+}
+
+// Show only the checkers placed before turnNum (turnNum starts at 0)
+export const boardAtTurn = ({ red, blue }, turnNum) => {
+  const redNum = Math.floor((turnNum + 1) / 2)
+  const blueNum = Math.floor((turnNum + 1) / 2 - 0.5)
+  return {
+    red: red.filter((_, i) => i < redNum),
+    blue: blue.filter((_, i) => i < blueNum)
+  }
 }
 
 Board.propTypes = {
