@@ -4,6 +4,7 @@ import propTypes from 'prop-types'
 import { useQuery } from '@apollo/react-hooks'
 
 import TurnControls from '../components/TurnControls'
+import BotMessages from '../components/BotMessages'
 import Board, { transformBoardData, boardAtTurn } from '../components/Board'
 import { GET_MATCH } from '../gql/match'
 
@@ -59,6 +60,7 @@ const ViewMatchPage = ({ id }) => {
     <Select options={roundOptions} value={selectedRound} onChange={(_, { value }) => handleSelectedRoundChange(value)}/>
     <TurnControls boardData={boardData} onTurnChange={handleTurnChange} />
     <Board boardData={turnData} />
+    <BotMessages match={matchData.match} selectedRound={selectedRound} currentTurn={currentTurn} />
   </Segment>
 }
 
