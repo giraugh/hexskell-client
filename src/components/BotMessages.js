@@ -13,11 +13,13 @@ const segmentStyle = {
 const BotMessages = ({ match, selectedRound, currentTurn = Infinity }) => {
   const competitors = match.competitors
   const round = match.rounds[selectedRound]
+  const gameState = JSON.parse(round.terminalStateStr)
+  const gameLength = gameState.red.length + gameState.blue.length
   const logs = match.botLogs.filter(({ round }) => round === selectedRound + 1)
   const errors = match.botErrors.filter(({ round }) => round === selectedRound + 1)
 
   const messages = [
-    ...errors.map(({ player, message }) => ({ player, message, active: true, isError: true, turn: Infinity })),
+    ...errors.map(({ player, message }) => ({ player, message, active: currentTurn === gameLength, isError: true, turn: gameLength + 1 })),
     ...logs.map(({ player, message, turn }) => ({ player, message, active: turn <= currentTurn, turn, isError: false }))
   ]
 

@@ -19,7 +19,7 @@ const MessagesDisplay = ({ messages, title = 'Logs', titleStyle }) => {
         <Table.Body>
           {sortedMessages.map(msg => (
             <Table.Row key={msg.turn + ':' + msg.message} negative={msg.isError} disabled={!msg.active} style={{ backgroundColor: msg.turn % 2 === 0 ? 'rgba(0,0,50,.02)' : 'white' }}>
-              <Table.Cell textAlign='center'> {msg.turn + 1} </Table.Cell>
+              <Table.Cell textAlign='center'> {msg.turn} </Table.Cell>
               <Table.Cell> {msg.message} </Table.Cell>
               <Table.Cell textAlign='center'> {msg.isError && <Icon name='warning' />} </Table.Cell>
             </Table.Row>
