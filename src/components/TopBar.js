@@ -24,6 +24,7 @@ const TopBar = () => {
       <Container>
         <Menu.Item header as={Link} to='/'style={menuItemStyle} active={pathname === '/'}>Haskell</Menu.Item>
         <Menu.Item as={Link} to='/bots' style={menuItemStyle} active={pathname === '/bots'}>Bots</Menu.Item>
+        <Menu.Item as={Link} to='/practice-match' style={menuItemStyle} active={pathname === '/practice-match'}>Test</Menu.Item>
         <Menu.Item position='right'>
           <AccountAction />
         </Menu.Item>

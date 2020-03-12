@@ -5,9 +5,9 @@ import propTypes from 'prop-types'
 import 'ace-builds/src-noconflict/mode-javascript'
 import 'ace-builds/src-noconflict/theme-tomorrow'
 
-export const BotCodeEditor = ({ onLoad, onChange, value, ...props }) => (
+export const BotCodeEditor = ({ onLoad, onChange, value, ...other }) => (
   <AceEditor
-    style={{ width: '100%', borderRadius: '5px', border: '2px solid #dcdcdc' }}
+    style={{ width: '100%', borderRadius: '5px', border: '2px solid #dcdcdc', ...other.extraStyle }}
     mode='javascript'
     theme='tomorrow'
     name='Bot Code Editor'
@@ -19,11 +19,11 @@ export const BotCodeEditor = ({ onLoad, onChange, value, ...props }) => (
     setOptions={{
       useWorker: false
     }}
-    {...props}
+    {...other}
   />
 )
 
-export const BotCodeViewer = ({ value, ...props }) => {
+export const BotCodeViewer = ({ value, ...other }) => {
   const editorRef = useRef(null)
 
   useEffect(() => {
@@ -54,7 +54,7 @@ export const BotCodeViewer = ({ value, ...props }) => {
         highlightActiveLine: false,
         highlightGutterLine: false
       }}
-      {...props}
+      {...other}
     />
   )
 }

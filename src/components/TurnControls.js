@@ -10,6 +10,9 @@ const TurnControls = ({ boardData, onTurnChange }) => {
   const [isPlaying, setIsPlaying] = useState(false)
   const playInterval = 100
 
+  // Provide default for board data
+  boardData = boardData || { red: [], blue: [] }
+
   // Set turn to last turn on round change / load
   useEffect(() => {
     const newTurn = calcGameLength(boardData)

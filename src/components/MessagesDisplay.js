@@ -3,7 +3,7 @@ import { Table, Icon, Container, Header } from 'semantic-ui-react'
 import propTypes from 'prop-types'
 
 // Logs have format [{ turn, message, isError, active }]
-const MessagesDisplay = ({ messages, title = 'Logs', titleStyle }) => {
+const MessagesDisplay = ({ messages = [], title = 'Logs', titleStyle }) => {
   const sortedMessages = messages.sort((a, b) => a.turn - b.turn)
   return (
     <Container style={{ width: '100%', margin: 0 }}>

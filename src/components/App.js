@@ -13,6 +13,7 @@ const SettingsPage = lazy(() => import('../pages/SettingsPage'))
 const DashboardPage = lazy(() => import('../pages/DashboardPage'))
 const CreateBotPage = lazy(() => import('../pages/CreateBotPage'))
 const EditBotPage = lazy(() => import('../pages/EditBotPage'))
+const PracticeMatchPage = lazy(() => import('../pages/PracticeMatchPage'))
 
 const withSuspense = (Page, props) => _ => (<Suspense fallback={<div>loading...</div>}> <Page {...props} /> </Suspense>)
 
@@ -33,6 +34,7 @@ const App = () => {
               <Route exact path='/create-bot' component={withSuspense(CreateBotPage)}/>
               <Route exact path='/create-bot/continue/:id' component={withSuspense(EditBotPage, { isContinue: true })}/>
               <Route exact path='/edit-bot/:id' component={withSuspense(EditBotPage)}/>
+              <Route exact path='/practice-match' component={withSuspense(PracticeMatchPage)}/>
             </Switch>
           </Container>
         </Segment>
