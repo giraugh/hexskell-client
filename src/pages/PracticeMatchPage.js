@@ -10,10 +10,27 @@ import { BotCodeEditor } from '../components/BotCodeDisplay'
 import { useLoggedIn } from '../hooks/authentication'
 import { PERFORM_TEST_ROUND } from '../gql/match'
 
+const DEFAULT_BOT_CODE = `// Hexskell(Beta) example bot code
+// muck around with this code and come up with something cool!
+
+// Import some utilies from standard library
+// #import std/makePositionsList as posList
+// #import std/isTaken as taken
+
+// Create function to test whether a given hex, h, is empty
+const empty = h => !taken([...friendlies, ...enemies], h)
+
+// Use that function to get list of all possible positions that are also empty
+const pos = posList().filter(empty)
+
+// Return a random element from this list
+return pos[Math.floor(Math.random() * pos.length)]
+`
+
 const DO_NOTHING = () => {}
 
 const PracticeMatchPage = () => {
-  const [scripts, setScripts] = useState(['', ''])
+  const [scripts, setScripts] = useState([DEFAULT_BOT_CODE, DEFAULT_BOT_CODE])
   const [messages, setMessages] = useState([[], []])
   const [boardData, setBoardData] = useState()
   const [currentTurn, setCurrentTurn] = useState(0)
@@ -104,8 +121,6 @@ const PracticeMatchPage = () => {
     </Segment>
   )
 }
-
-const DEFAULT_BOT_CODE = '// default bot code'
 
 const BotCodeEditorPanel = ({ title, onApplyCode = DO_NOTHING, onSave = DO_NOTHING, messages = [], matchLoading }) => {
   const { loggedIn } = useLoggedIn()
