@@ -61,6 +61,11 @@ const PracticeMatchPage = () => {
     }
   }
 
+  const handleSaveBot = (code) => {
+    // Redirect to creating bot page
+
+  }
+
   const decorateMessages = messages => messages.map(m => {
     if (boardData) {
       const gameLength = boardData.red.length + boardData.blue.length
@@ -110,12 +115,14 @@ const PracticeMatchPage = () => {
           onApplyCode={handleApplyCode(0)}
           messages={decorateMessages(messages[0])}
           matchLoading={matchLoading}
+          onSave={handleSaveBot}
         />
         <BotCodeEditorPanel
           title={'Bot 2'}
           onApplyCode={handleApplyCode(1)}
           messages={decorateMessages(messages[1])}
           matchLoading={matchLoading}
+          onSave={handleSaveBot}
         />
       </div>
     </Segment>
@@ -152,7 +159,7 @@ const BotCodeEditorPanel = ({ title, onApplyCode = DO_NOTHING, onSave = DO_NOTHI
         <Button style={{ borderRadius: 0 }} onClick={handleApplyCode} disabled={matchLoading}> <Icon name='save' /> Update </Button>
         <Button style={{ borderRadius: 0 }} onClick={handleReset}> <Icon name='redo' /> Reset </Button>
         <Button style={{ borderRadius: 0 }} onClick={handleClear}> <Icon name='delete' /> Clear </Button>
-        <Button style={{ borderRadius: 0 }} onClick={handleSaveBot} disabled={!loggedIn || changedSinceApplication}> <Icon name='upload' /> Save as Bot </Button>
+        {/* <Button style={{ borderRadius: 0 }} onClick={handleSaveBot} disabled={!loggedIn || changedSinceApplication}> <Icon name='upload' /> Save as Bot </Button> */}
       </Button.Group>
       <MessagesDisplay messages={messages} titleStyle={{ marginTop: 20 }} />
     </div>
